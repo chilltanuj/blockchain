@@ -4,9 +4,12 @@ import { SiEthereum } from 'react-icons/si';
 import { BsInfoCircle } from 'react-icons/bs';
 import { TransactionContext } from "../context/TransactionContext";
 import { Loader } from './';
+import { shortenAddress } from '../utils/shortenAddress';
 
+// Common styles for grid items
 const commonStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 
+// Input component to handle form input
 const Input = ({ placeholder, name, type, value, handleChange }) => (
     <input
         placeholder={placeholder}
@@ -19,18 +22,20 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 );
 
 const Welcome = () => {
-    const { connectWallet, currentAccount, formData, sendTransaction, handleChange, isLoading } = useContext(TransactionContext); // Make sure to get isLoading from context
+    const { connectWallet, currentAccount, formData, sendTransaction, handleChange, isLoading } = useContext(TransactionContext);
 
+    // Form submission handler
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
         const { addressTo, amount, keyword, message } = formData;
 
-        // Log the transaction data
-        console.log("Submitting transaction with the following data:", formData);
+        // Simple validation to check if all fields are filled
+        if (!addressTo || !amount || !keyword || !message) {
+            return alert("Please fill in all fields.");
+        }
 
-        if (!addressTo || !amount || !keyword || !message) return;
-
-        await sendTransaction(); // Ensure this is awaited
+        // Send transaction if all data is valid
+        await sendTransaction();
     }
 
     return (
@@ -43,6 +48,7 @@ const Welcome = () => {
                     <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
                         Explore The Crypto World. Buy And Sell Crypto Currency easily on Delta.
                     </p>
+
                     {!currentAccount && (
                         <button
                             type="button"
@@ -52,6 +58,7 @@ const Welcome = () => {
                             <p className="text-white text-base font-semibold">Connect Wallet</p>
                         </button>
                     )}
+
                     <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
                         <div className={`rounded-tl-2xl ${commonStyles}`}>Reliability</div>
                         <div className={commonStyles}>Security</div>
@@ -72,23 +79,27 @@ const Welcome = () => {
                                 <BsInfoCircle fontSize={17} color="#fff" />
                             </div>
                             <div>
-                                <p className="text-white font-light text-sm">Address</p>
+                                <p className="text-white font-light text-sm">
+                                    {currentAccount ? shortenAddress(currentAccount) : 'Not Connected'}
+                                </p>
                                 <p className="text-white font-semibold text-lg mt-1">Ethereum</p>
                             </div>
                         </div>
                     </div>
+
                     <form className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism" onSubmit={handleSubmit}>
                         <Input placeholder="Address To" name="addressTo" type="text" value={formData.addressTo} handleChange={handleChange} />
                         <Input placeholder="Amount (ETH)" name="amount" type="number" value={formData.amount} handleChange={handleChange} />
                         <Input placeholder="Keyword (Gif)" name="keyword" type="text" value={formData.keyword} handleChange={handleChange} />
                         <Input placeholder="Enter Message" name="message" type="text" value={formData.message} handleChange={handleChange} />
+
                         <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-                        {isLoading ? ( // Conditional rendering for Loader
+                        {isLoading ? (
                             <Loader />
                         ) : (
                             <button
-                                type="submit" // Change to type "submit"
+                                type="submit"
                                 className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
                             >
                                 Send Now
