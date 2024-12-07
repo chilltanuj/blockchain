@@ -1,0 +1,202 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    overflow: hidden;
+    background-color: #121212;
+    /* Added dark background for contrast */
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.login-box {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    /* Balanced padding */
+    border-radius: 15px;
+    text-align: center;
+    width: 60%;
+    /* Adjusted to fit a wider screen ratio */
+    max-width: 900px;
+    /* Maximum width */
+    min-height: 400px;
+    /* Reduced height to fit webpage */
+    border: 1px solid #9646e0;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+h1.title {
+    font-size: 44px;
+    font-family: "Orbitron", sans-serif;
+    margin-bottom: 20px;
+    color: #DAB6FC;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    animation: glowTitle 1.5s ease-in-out infinite;
+}
+
+p {
+    margin-bottom: 30px;
+    color: #D4D4D4;
+}
+
+.wallet-button,
+.login-button {
+    background-color: #7b30c2;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 60%;
+    /* Adjusted to fit wider box */
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.4);
+}
+
+.wallet-button:hover,
+.login-button:hover {
+    background-color: #6a20b3;
+}
+
+.divider {
+    position: relative;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.divider span {
+    background-color: #2a2a2a;
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.divider:before {
+    content: "";
+    height: 1px;
+    background: #666;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    z-index: 0;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+input {
+    width: 60%;
+    /* Adjusted input width to fit the wider box */
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #888;
+}
+
+.additional-links a {
+    color: #8a2be2;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.additional-links a:hover {
+    text-decoration: none;
+    color: #DAB6FC;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.glow {
+    box-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 30px #8a2be2;
+    transition: box-shadow 0.3s ease;
+}
+
+.glow:hover {
+    box-shadow: 0 0 15px #8a2be2, 0 0 30px #8a2be2, 0 0 45px #8a2be2;
+}
+
+@keyframes glowTitle {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 30px #8a2be2;
+    }
+
+    50% {
+        text-shadow: 0 0 20px #8a2be2, 0 0 40px #d8b9ff, 0 0 50px #d8b9ff;
+    }
+}
